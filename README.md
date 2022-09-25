@@ -73,7 +73,7 @@ pnpm serve
 
 Actual [workflow](https://github.com/aramics/monitant/blob/main/.github/workflows/ci.yml) is:
 
-![image](![image](https://user-images.githubusercontent.com/29895599/192153215-1e586075-cfb2-4d30-b43f-4729160b9376.png))
+![image](https://user-images.githubusercontent.com/29895599/192153215-1e586075-cfb2-4d30-b43f-4729160b9376.png)
 
 ### Build & Test job
 
@@ -88,3 +88,5 @@ Create a [Github personal access token](https://docs.github.com/en/authenticatio
 
 - Replace `base` config in `vite.config.ts` to match your repo name
 - Create `GIT_AUTHOR_NAME` and `GIT_AUTHOR_EMAIL` secrets in your repo (it will be the author of commits to `gh-pages` branch)
+
+
