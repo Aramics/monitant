@@ -1,12 +1,16 @@
 {
-  "name": "vite-react-ts-ghactions-template",
+  "name": "monitant",
   "version": "1.0.0",
-  "description": "React + TypeScript + Vite + Github Actions starter template",
+  "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pchmn/vite-react-ts-ghactions-template.git"
+    "url": "git+https://github.com/aramics/monitant.git"
   },
   "keywords": [
+    "web3",
+    "erc20",
+    "balance",
+    "monitor",
     "react",
     "vite",
     "typescript",
@@ -14,9 +18,9 @@
     "ghactions",
     "vitest"
   ],
-  "author": "pchmn",
+  "author": "aramics",
   "license": "MIT",
-  "homepage": "https://github.com/pchmn/vite-react-ts-ghactions-template",
+  "homepage": "https://github.com/aramics/monitant",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
