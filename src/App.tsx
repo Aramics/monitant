@@ -1,7 +1,9 @@
+import Header from "./components/Header";
+
 const App = (): JSX.Element => {
 	return (
 		<main>
-			<header>Monitant</header>
+			<Header></Header>
 			<div>Balance monitor table</div>
 			<footer>Footer</footer>
 		</main>
