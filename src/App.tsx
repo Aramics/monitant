@@ -1,6 +1,8 @@
 import AddressFormModal from "./components/AddressAddForm";
 import Header from "./components/Header";
 import useWalletAddresses from "./hooks/useWalletAddresses";
+import "./App.css";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 const App = (): JSX.Element => {
 	const { addressList, saveAddress, error } = useWalletAddresses();
@@ -12,6 +14,7 @@ const App = (): JSX.Element => {
 			</Header>
 			<div>Balance monitor table</div>
 			<footer>Footer</footer>
+			<ThemeSwitch />
 		</main>
 	);
 };
