@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import useWalletAddresses from "src/hooks/useWalletAddresses";
 
-let testAddress = "0x2d2aFd26a86Ad2d3E5032Fce7A0Ff0F88468Fb0C";
+const testAddress = "0x2d2aFd26a86Ad2d3E5032Fce7A0Ff0F88468Fb0C";
 
 describe("useWalletAddresses", () => {
 	it("should not save wrong address", () => {
