@@ -8,7 +8,7 @@ const useWalletAddresses = (): {
 	removeAddress: (address: string) => boolean;
 	error: string;
 } => {
-	const [addressList, setAddressList] = useLocalStorage("wallet_address_list", [""]);
+	const [addressList, setAddressList] = useLocalStorage<string[]>("wallet_address_list", []);
 	const [error, setError] = useState("");
 
 	const saveAddress = (address: string): boolean => {
