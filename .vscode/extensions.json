@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "zixuanchen.vitest-explorer",
-    "editorconfig.editorconfig"
-  ]
+	"recommendations": ["dbaeumer.vscode-eslint", "zixuanchen.vitest-explorer", "editorconfig.editorconfig"]
 }
