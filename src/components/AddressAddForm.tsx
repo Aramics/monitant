@@ -24,7 +24,7 @@ const AddressFormModal = ({ onSave, error }: AddressAddFormProps): JSX.Element =
 		<>
 			<div className="flex">
 				<button
-					data-test-id="open-modal-button"
+					data-testid="open-modal-button"
 					title="Open modal"
 					onClick={(e) => setModalOpen(true)}
 					className="primary"
