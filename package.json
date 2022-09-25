@@ -36,8 +36,11 @@
 		"prepush": "pnpm format && pnpm lint && pnpm test:ci && pnpm build"
 	},
 	"dependencies": {
+		"@testing-library/react-hooks": "^8.0.1",
+		"ethers": "^5.7.1",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"usehooks-ts": "^2.7.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.3",
