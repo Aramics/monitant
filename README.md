@@ -73,7 +73,7 @@ pnpm serve
 
 Actual [workflow](https://github.com/aramics/monitant/blob/main/.github/workflows/ci.yml) is:
 
-![image](https://user-images.githubusercontent.com/12658241/142628675-1f9e9617-e5da-4dff-aa79-abc0883cf037.png)
+![image](![image](https://user-images.githubusercontent.com/29895599/192153215-1e586075-cfb2-4d30-b43f-4729160b9376.png))
 
 ### Build & Test job
 
