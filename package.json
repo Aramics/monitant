@@ -29,9 +29,11 @@
 		"test:watch": "vitest",
 		"test:ci": "vitest run --coverage",
 		"serve": "vite preview",
-		"prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",
+		"prepare": "husky install",
 		"lint": "eslint --cache --fix ./src",
-		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|tsx|css|json)\""
+		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|tsx|css|json)\"",
+		"precommit": "pnpm format && pnpm lint && pnpm test:ci",
+		"prepush": "pnpm format && pnpm lint && pnpm test:ci && pnpm build"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
