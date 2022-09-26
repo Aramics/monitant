@@ -19,9 +19,10 @@
 - Simple responsive filterable table interface
 - Theming with respect for system preference (Light, Dark, System)
 
+
 <br/>
 
-<img src="https://user-images.githubusercontent.com/29895599/192389675-92b14075-d75e-4bbf-a0cb-fbf6adb3f821.png" alt="screenshot" style="max-width: 55%;">
+<img src="https://user-images.githubusercontent.com/29895599/192390546-0972ca13-8f7f-482e-906c-4ff9cbc6f092.gif" alt="screenshot" style="max-width: 55%;">
 
 <br>
 
