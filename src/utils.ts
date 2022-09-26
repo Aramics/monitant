@@ -11,6 +11,25 @@ export const shortenAddress = (address: string, chars = 4): string => {
 	}
 };
 
+export const numberWithCommas = (x: string | number): string | number => {
+	if (isNaN(Number(x))) return x;
+
+	return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+};
+
+/**
+ * Format a string to certain decimals without approximation
+ *
+ * @param num the number to format
+ * @param fixed the number of decimal places
+ * @returns formated string in fixed decimal places or num
+ *
+ */
+export const toSignificant = (num: string | number, fixed = 4): string | number => {
+	const re = new RegExp("^-?\\d+(?:.\\d{0," + (fixed ?? -1).toString() + "})?");
+	return num.toString().match(re)?.[0] ?? num;
+};
+
 /** Web3 Helpers **/
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const getInjected = (): any => {

@@ -1,3 +1,4 @@
+import { numberWithCommas, toSignificant } from "src/utils";
 import { AddressTokenMap } from "../../types";
 
 type TokenBalanceTableRowProps = {
@@ -16,9 +17,15 @@ const TokenBalanceTableRow = ({
 	return (
 		<tr key={address}>
 			<td className="pin-left">{address}</td>
-			{tokenAddressList.map((tokenAddress) => (
-				<td key={tokenAddress}>{rowBalances?.[tokenAddress]?.balance ?? " - "}</td>
-			))}
+			{tokenAddressList.map((tokenAddress) => {
+				const balance = rowBalances?.[tokenAddress]?.balance;
+
+				return (
+					<td key={tokenAddress}>
+						{typeof balance !== "undefined" ? numberWithCommas(toSignificant(balance)) : " - "}
+					</td>
+				);
+			})}
 			<td className="pin-right">
 				<button className="btn-sm danger" onClick={() => onDelete(address)}>
 					X
