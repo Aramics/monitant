@@ -3,33 +3,46 @@ import Modal from "../Modal";
 import { useLockedBody } from "usehooks-ts";
 
 type AddressFormModalProps = {
-	onSave: (address: string) => boolean;
+	title?: string;
+	onSave: (address: string) => Promise<boolean>;
 	onClose: () => void;
 	isOpen: boolean;
 	error: string;
 };
 
-const AddressFormModal = ({ isOpen, onClose, onSave, error }: AddressFormModalProps): JSX.Element => {
+const AddressFormModal = ({
+	isOpen,
+	onClose,
+	onSave,
+	error,
+	title = "Add an address"
+}: AddressFormModalProps): JSX.Element => {
 	const [inputAddress, setInputAddress] = useState("");
 
 	useLockedBody(isOpen);
 
 	const handleSave = (): void => {
-		if (onSave(inputAddress)) {
-			setInputAddress("");
-			onClose();
-		}
+		onSave(inputAddress)
+			.then((saved) => {
+				if (saved) {
+					setInputAddress("");
+					onClose();
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<h3>Add an address</h3>
+			<h3>{title}</h3>
 
 			<div className="form-group">
 				<input
 					type="text"
 					value={inputAddress}
-					name="modalInputName"
+					name="walletAddress"
 					onChange={(e) => setInputAddress(e.target.value)}
 					className="form-control"
 					aria-label="Input wallet address"
@@ -40,7 +53,7 @@ const AddressFormModal = ({ isOpen, onClose, onSave, error }: AddressFormModalPr
 			{error !== "" && <div className="error">{error}</div>}
 
 			<div className="form-group">
-				<button onClick={handleSave} type="button" className="primary">
+				<button onClick={handleSave} type="button" className="primary" title="Save address">
 					Save
 				</button>
 			</div>
