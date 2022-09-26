@@ -130,7 +130,8 @@ button.btn-sm {
 	padding: 0.3em 0.6em;
 }
 
-input {
+input,
+select {
 	display: block;
 	width: 100%;
 	height: calc(1.5em + 0.75rem + 2px);
@@ -138,7 +139,7 @@ input {
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
-	color: #495057;
+	color: var(--neutral-dark);
 	background-color: var(--primary-bg);
 	background-clip: padding-box;
 	border: 1px solid #ced4da;
