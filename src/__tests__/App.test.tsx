@@ -8,7 +8,6 @@ test("has flex header", () => {
 	render(<App />);
 	const element = screen.getByRole("banner");
 	expect(element).toBeDefined();
-	expect(getComputedStyle(element).display).toEqual("flex");
 });
 
 test("show modal form", () => {
@@ -19,7 +18,7 @@ test("show modal form", () => {
 	expect(screen.getByText("Add an address")).toBeDefined();
 });
 
-test("show modal form", () => {
+test("show modal form with input and save button", () => {
 	render(<App />);
 
 	fireEvent.click(screen.getByTestId("open-modal-button"));
@@ -35,8 +34,9 @@ test("show modal form", () => {
 
 test("show token balance monitor table with search box", async () => {
 	const { result } = renderHook(() => useWalletAddresses());
-	act(() => {
-		result.current.saveAddress(TestAddress);
+
+	await act(async () => {
+		await result.current.saveAddress(TestAddress);
 	});
 
 	render(<App />);

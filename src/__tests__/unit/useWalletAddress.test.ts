@@ -9,36 +9,37 @@ describe("useWalletAddresses", () => {
 		expect(result.current.addressList.length).toBe(0);
 	});
 
-	it("should not save wrong address", () => {
+	it("should not save wrong address", async () => {
 		const { result } = renderHook(() => useWalletAddresses());
 
-		act(() => {
-			result.current.saveAddress(TestAddress.substring(0, TestAddress.length / 2));
+		await act(async () => {
+			await result.current.saveAddress(TestAddress.substring(0, TestAddress.length / 2));
 		});
 		expect(result.current.error.length).toBeGreaterThan(0);
 	});
 
-	it("should save unique right address", () => {
+	it("should save unique right address", async () => {
 		const { result } = renderHook(() => useWalletAddresses());
 
-		act(() => {
-			result.current.saveAddress(TestAddress);
+		await act(async () => {
+			await result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.addressList.length).toBe(1);
 		expect(result.current.error).toBe("");
 
-		act(() => {
-			result.current.saveAddress(TestAddress);
+		await act(async () => {
+			await result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.error.length).toBeGreaterThan(0);
 	});
 
-	it("should remove right address", () => {
+	it("should remove right address", async () => {
 		const { result } = renderHook(() => useWalletAddresses());
-		act(() => {
-			result.current.saveAddress(TestAddress);
+
+		await act(async () => {
+			await result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.addressList.length).toBe(1);
