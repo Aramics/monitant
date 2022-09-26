@@ -1,9 +1,10 @@
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Web3Provider } from "src/types";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useUpdateEffect } from "usehooks-ts";
 
 const useWalletAddresses = (
+	chainId: number,
 	provider?: Web3Provider
 ): {
 	addressList: string[];
@@ -11,7 +12,8 @@ const useWalletAddresses = (
 	removeAddress: (address: string) => boolean;
 	error: string;
 } => {
-	const [addressList, setAddressList] = useLocalStorage<string[]>("wallet_address_list", []);
+	const storageKey = "wallet_address_list_" + String(chainId);
+	const [addressList, setAddressList] = useLocalStorage<string[]>(storageKey, []);
 	const [error, setError] = useState("");
 
 	const saveAddress = async (address: string): Promise<boolean> => {
@@ -48,6 +50,10 @@ const useWalletAddresses = (
 		}
 		return false;
 	};
+
+	useUpdateEffect(() => {
+		if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("local-storage"));
+	}, [chainId]);
 
 	return { addressList, saveAddress, removeAddress, error };
 };

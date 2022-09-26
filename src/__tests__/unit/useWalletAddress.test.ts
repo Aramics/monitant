@@ -1,16 +1,16 @@
 import { act, renderHook } from "@testing-library/react";
 import useWalletAddresses from "src/hooks/useWalletAddresses";
-import { TestAddress } from "../setupTests";
+import { TestAddress, DefaultChainId } from "../setupTests";
 
 describe("useWalletAddresses", () => {
 	it("should start with empty list", () => {
-		const { result } = renderHook(() => useWalletAddresses());
+		const { result } = renderHook(() => useWalletAddresses(DefaultChainId));
 
 		expect(result.current.addressList.length).toBe(0);
 	});
 
 	it("should not save wrong address", async () => {
-		const { result } = renderHook(() => useWalletAddresses());
+		const { result } = renderHook(() => useWalletAddresses(DefaultChainId));
 
 		await act(async () => {
 			await result.current.saveAddress(TestAddress.substring(0, TestAddress.length / 2));
@@ -19,7 +19,7 @@ describe("useWalletAddresses", () => {
 	});
 
 	it("should save unique right address", async () => {
-		const { result } = renderHook(() => useWalletAddresses());
+		const { result } = renderHook(() => useWalletAddresses(DefaultChainId));
 
 		await act(async () => {
 			await result.current.saveAddress(TestAddress);
@@ -36,7 +36,7 @@ describe("useWalletAddresses", () => {
 	});
 
 	it("should remove right address", async () => {
-		const { result } = renderHook(() => useWalletAddresses());
+		const { result } = renderHook(() => useWalletAddresses(DefaultChainId));
 
 		await act(async () => {
 			await result.current.saveAddress(TestAddress);

@@ -18,7 +18,7 @@ const App = ({ skipProviderCheck = false }: { skipProviderCheck?: boolean }): JS
 	const chainId = useChain();
 	const provider = getProvider();
 
-	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses(provider);
+	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses(Number(chainId), provider);
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [searchText, setSearchText] = useState<string>("");
 	const [refreshInterval, setRefreshInterval] = useState(20);

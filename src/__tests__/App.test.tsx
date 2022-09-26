@@ -1,6 +1,6 @@
 import App from "../App";
 import { act, fireEvent, render, renderHook, screen } from "@testing-library/react";
-import { TestAddress } from "./setupTests";
+import { TestAddress, DefaultChainId } from "./setupTests";
 import useWalletAddresses from "src/hooks/useWalletAddresses";
 import { shortenAddress } from "src/utils";
 
@@ -33,7 +33,7 @@ test("show modal form with input and save button", () => {
 });
 
 test("show token balance monitor table with search box", async () => {
-	const { result } = renderHook(() => useWalletAddresses());
+	const { result } = renderHook(() => useWalletAddresses(DefaultChainId));
 
 	await act(async () => {
 		await result.current.saveAddress(TestAddress);
