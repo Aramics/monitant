@@ -5,10 +5,11 @@ import useWalletAddresses from "./hooks/useWalletAddresses";
 import ThemeSwitch from "./components/ThemeSwitch";
 import ChainSwitch from "./components/ChainSwitch";
 import useChain from "./hooks/useChainId";
+import { useState } from "react";
 
 const App = (): JSX.Element => {
-	const { addressList, saveAddress, error } = useWalletAddresses();
-	console.log(addressList);
+	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses();
+	const [addFormOpen, setAddFormOpen] = useState(false);
 	const chainId = useChain();
 
 	return (
@@ -16,12 +17,21 @@ const App = (): JSX.Element => {
 			<Header>
 				<div className="flex">
 					<ChainSwitch chainId={chainId} />
-					<AddressFormModal onSave={saveAddress} error={error} />
+					<div className="flex">
+						<button title="Open modal" onClick={(e) => setAddFormOpen(true)} className="primary">
+							+ Add address
+						</button>
+					</div>
+					<ThemeSwitch />
 				</div>
 			</Header>
-			<div>Balance monitor table</div>
-			<footer>Footer</footer>
-			<ThemeSwitch />
+
+			<AddressFormModal
+				isOpen={addFormOpen}
+				onClose={() => setAddFormOpen(false)}
+				onSave={saveAddress}
+				error={error}
+			/>
 		</main>
 	);
 };
