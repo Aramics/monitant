@@ -1,30 +1,36 @@
 import "./App.css";
-import AddressFormModal from "./components/AddressAddForm";
+import AddressFormModal from "./components/AddressList/AddressAddForm";
 import Header from "./components/Header";
 import useWalletAddresses from "./hooks/useWalletAddresses";
 import ThemeSwitch from "./components/ThemeSwitch";
 import ChainSwitch from "./components/ChainSwitch";
 import useChain from "./hooks/useChainId";
 import { useState } from "react";
+import AddressListSearch from "./components/AddressList/AddressListSearch";
+import AddressAddButton from "./components/AddressList/AddressAddButton";
 
 const App = (): JSX.Element => {
-	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses();
+	const { saveAddress, error } = useWalletAddresses();
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const chainId = useChain();
+	const [searchText, setSearchText] = useState<string>("");
 
 	return (
 		<main>
 			<Header>
 				<div className="flex">
 					<ChainSwitch chainId={chainId} />
-					<div className="flex">
-						<button title="Open modal" onClick={(e) => setAddFormOpen(true)} className="primary">
-							+ Add address
-						</button>
-					</div>
 					<ThemeSwitch />
 				</div>
 			</Header>
+
+			<div className="monitor">
+				<div className="toolbar flex">
+					<AddressListSearch search={searchText} onSearch={setSearchText} />
+					<AddressAddButton onClick={() => setAddFormOpen(true)} />
+				</div>
+				<div className="balances"></div>
+			</div>
 
 			<AddressFormModal
 				isOpen={addFormOpen}
