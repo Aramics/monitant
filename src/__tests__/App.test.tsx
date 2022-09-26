@@ -39,7 +39,7 @@ test("show token balance monitor table with search box", async () => {
 		await result.current.saveAddress(TestAddress);
 	});
 
-	render(<App />);
+	render(<App skipProviderCheck={true} />);
 
 	const firstTableBodyCell = screen.getAllByRole("cell")[0];
 

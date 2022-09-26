@@ -13,7 +13,7 @@ import TokenBalanceMonitor from "./components/TokenBalance/TokenBalanceMonitor";
 import TokenBalanceRefreshInterval from "./components/TokenBalance/TokenBalanceRefreshInterval";
 import { getProvider } from "./utils";
 
-const App = (): JSX.Element => {
+const App = ({ skipProviderCheck = false }: { skipProviderCheck?: boolean }): JSX.Element => {
 	const chainId = useChain();
 	const provider = getProvider();
 
@@ -52,7 +52,7 @@ const App = (): JSX.Element => {
 					</div>
 				</div>
 
-				{provider != null ? (
+				{provider != null || skipProviderCheck ? (
 					<TokenBalanceMonitor
 						addressList={filteredAddressList}
 						tokenAddressList={tokenAddressList}
