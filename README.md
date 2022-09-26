@@ -17,7 +17,11 @@
 - Store address on client (local storage)
 - Refreshable at certain interval
 - Simple responsive filterable table interface
+- Theming with respect for system preference (Light, Dark, System)
 
+<br/>
+
+<img src="https://user-images.githubusercontent.com/29895599/192389675-92b14075-d75e-4bbf-a0cb-fbf6adb3f821.png" alt="screenshot" style="max-width: 55%;">
 
 <br>
 
