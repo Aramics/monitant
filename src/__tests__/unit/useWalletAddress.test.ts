@@ -1,7 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import useWalletAddresses from "src/hooks/useWalletAddresses";
-
-const testAddress = "0x2d2aFd26a86Ad2d3E5032Fce7A0Ff0F88468Fb0C";
+import { TestAddress } from "../setupTests";
 
 describe("useWalletAddresses", () => {
 	it("should start with empty list", () => {
@@ -14,7 +13,7 @@ describe("useWalletAddresses", () => {
 		const { result } = renderHook(() => useWalletAddresses());
 
 		act(() => {
-			result.current.saveAddress(testAddress.substring(0, testAddress.length / 2));
+			result.current.saveAddress(TestAddress.substring(0, TestAddress.length / 2));
 		});
 		expect(result.current.error.length).toBeGreaterThan(0);
 	});
@@ -23,14 +22,14 @@ describe("useWalletAddresses", () => {
 		const { result } = renderHook(() => useWalletAddresses());
 
 		act(() => {
-			result.current.saveAddress(testAddress);
+			result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.addressList.length).toBe(1);
 		expect(result.current.error).toBe("");
 
 		act(() => {
-			result.current.saveAddress(testAddress);
+			result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.error.length).toBeGreaterThan(0);
@@ -39,13 +38,13 @@ describe("useWalletAddresses", () => {
 	it("should remove right address", () => {
 		const { result } = renderHook(() => useWalletAddresses());
 		act(() => {
-			result.current.saveAddress(testAddress);
+			result.current.saveAddress(TestAddress);
 		});
 
 		expect(result.current.addressList.length).toBe(1);
 
 		act(() => {
-			result.current.removeAddress(testAddress);
+			result.current.removeAddress(TestAddress);
 		});
 		expect(result.current.addressList.length).toBe(0);
 	});
