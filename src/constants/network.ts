@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { NetowrkInfo } from "src/types";
 
 export enum ChainId {
@@ -52,18 +51,4 @@ export const SUPPORTED_NETWORKS: {
 		blockExplorerUrls: ["https://testnet.bscscan.com"],
 		iconUrls: []
 	}
-};
-
-export const getInjected = (): any => {
-	return (window as any).ethereum;
-};
-
-export const getProvider = (pollingInterval = 15000): ethers.providers.Web3Provider | null => {
-	if (typeof window === "undefined") {
-		return null;
-	}
-
-	const provider = new ethers.providers.Web3Provider(getInjected());
-	provider.pollingInterval = pollingInterval;
-	return provider;
 };

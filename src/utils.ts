@@ -1,10 +1,23 @@
-import { getInjected } from "./constants/network";
+import { ethers } from "ethers";
 import { NetowrkInfo } from "./types";
 
-/**
- * Add default nextwork from config
- */
-export async function addChainNetwork(network: NetowrkInfo): Promise<boolean> {
+/** Web3 Helpers **/
+export const getInjected = (): any => {
+	return (window as any).ethereum;
+};
+
+export const getProvider = (pollingInterval = 15000): ethers.providers.Web3Provider | null => {
+	let ethereum = getInjected();
+
+	if (typeof ethereum === "undefined") return null;
+
+	const provider = new ethers.providers.Web3Provider(ethereum);
+	provider.pollingInterval = pollingInterval;
+	return provider;
+};
+
+//request chain switch or add if not on wallet
+export const addChainNetwork = async (network: NetowrkInfo): Promise<boolean> => {
 	let chainIdHex = network.chainId.toString(16);
 
 	if (!chainIdHex.startsWith("0x")) {
@@ -48,4 +61,4 @@ export async function addChainNetwork(network: NetowrkInfo): Promise<boolean> {
 		}
 	}
 	return false;
-}
+};
