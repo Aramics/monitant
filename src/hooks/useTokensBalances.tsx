@@ -50,8 +50,6 @@ const useTokenBalances = (
 				};
 			});
 
-			console.log(balancesMap, mounted);
-
 			if (mounted) setBalances(balancesMap);
 		};
 
@@ -61,7 +59,7 @@ const useTokenBalances = (
 			mounted = false;
 		};
 	}, [addressList, reload, tokenAddressList]);
-	console.log(balances);
+
 	return balances;
 };
 

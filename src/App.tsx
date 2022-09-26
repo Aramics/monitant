@@ -12,6 +12,7 @@ import { TOKENS_NETWORK_MAP } from "./constants/addresses";
 import TokenBalanceMonitor from "./components/TokenBalance/TokenBalanceMonitor";
 import TokenBalanceRefreshInterval from "./components/TokenBalance/TokenBalanceRefreshInterval";
 import { getProvider } from "./utils";
+import { useDebounce } from "usehooks-ts";
 
 const App = ({ skipProviderCheck = false }: { skipProviderCheck?: boolean }): JSX.Element => {
 	const chainId = useChain();
@@ -21,6 +22,7 @@ const App = ({ skipProviderCheck = false }: { skipProviderCheck?: boolean }): JS
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [searchText, setSearchText] = useState<string>("");
 	const [refreshInterval, setRefreshInterval] = useState(20);
+	const searchTextDebounced = useDebounce<string>(searchText, 1000);
 
 	// momoize token address and name
 	const [tokenAddressList, tokenNameList] = useMemo(() => {
@@ -31,8 +33,8 @@ const App = ({ skipProviderCheck = false }: { skipProviderCheck?: boolean }): JS
 
 	// filter address list
 	const filteredAddressList = useMemo(() => {
-		return addressList.filter((address) => address.toLowerCase().includes(searchText.toLowerCase()));
-	}, [searchText, addressList]);
+		return addressList.filter((address) => address.toLowerCase().includes(searchTextDebounced.toLowerCase()));
+	}, [searchTextDebounced, addressList]);
 
 	return (
 		<main>
