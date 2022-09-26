@@ -29,4 +29,4 @@ export type Balances = { [address: string]: AddressTokenMap };
 
 export type TokenList = { [address: string]: string };
 
-export type Provider = ethers.providers.Web3Provider | null;
+export type Web3Provider = ethers.providers.Web3Provider | undefined;

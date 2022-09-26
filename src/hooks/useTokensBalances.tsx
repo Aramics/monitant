@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { getBalancesForEthereumAddresses } from "ethereum-erc20-token-balances-multicall";
-import { Balances, AddressTokenMap } from "../types";
+import { Balances, AddressTokenMap, Web3Provider } from "../types";
 import { useUpdateEffect } from "usehooks-ts";
-import { ethers } from "ethers";
 
 const useTokenBalances = (
 	tokenAddressList: string[],
 	addressList: string[],
-	provider: ethers.providers.Web3Provider | null,
-	reload: number | boolean
+	reload: number | boolean,
+	provider?: Web3Provider
 ): Balances | undefined => {
 	const [balances, setBalances] = useState<Balances>();
 
@@ -16,7 +15,13 @@ const useTokenBalances = (
 		let mounted = true;
 
 		const fetchDemo = async (): Promise<void> => {
-			if (provider == null || addressList.length === 0 || tokenAddressList.length === 0) return;
+			if (
+				typeof provider === "undefined" ||
+				provider == null ||
+				addressList.length === 0 ||
+				tokenAddressList.length === 0
+			)
+				return;
 
 			const requestOption = {
 				// erc20 tokens to query!

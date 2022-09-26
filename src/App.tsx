@@ -17,7 +17,7 @@ const App = (): JSX.Element => {
 	const chainId = useChain();
 	const provider = getProvider();
 
-	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses();
+	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses(provider);
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [searchText, setSearchText] = useState<string>("");
 	const [refreshInterval, setRefreshInterval] = useState(20);
@@ -52,14 +52,18 @@ const App = (): JSX.Element => {
 					</div>
 				</div>
 
-				<TokenBalanceMonitor
-					addressList={filteredAddressList}
-					tokenAddressList={tokenAddressList}
-					tokenNameList={tokenNameList}
-					refreshInterval={refreshInterval * 1000}
-					provider={provider}
-					onAddressDelete={removeAddress}
-				/>
+				{provider != null ? (
+					<TokenBalanceMonitor
+						addressList={filteredAddressList}
+						tokenAddressList={tokenAddressList}
+						tokenNameList={tokenNameList}
+						refreshInterval={refreshInterval * 1000}
+						provider={provider}
+						onAddressDelete={removeAddress}
+					/>
+				) : (
+					<div className="error"> Kindly install a web3 wallet i.e MetaMask to continue</div>
+				)}
 			</div>
 
 			<AddressFormModal

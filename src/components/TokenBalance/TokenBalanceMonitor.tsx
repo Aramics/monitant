@@ -6,14 +6,14 @@ import TokenBalanceTablePagination from "./TokenBalanceTablePagination";
 import TokenBalanceTableRow from "./TokenBalanceTableRow";
 import { useInterval, useCounter, useMediaQuery } from "usehooks-ts";
 import { shortenAddress } from "../../utils";
-import { Provider } from "src/types";
+import { Web3Provider } from "src/types";
 
 type TokenBalanceMonitorProps = {
 	addressList: string[];
 	tokenAddressList: string[];
 	tokenNameList: string[];
 	refreshInterval: number | null;
-	provider: Provider;
+	provider?: Web3Provider;
 	onAddressDelete: (address: string) => void;
 };
 
@@ -40,7 +40,7 @@ const TokenBalanceMonitor = ({
 	useInterval(increment, refreshInterval);
 
 	// get balances
-	const balances = useTokenBalances(tokenAddressList, filteredAddressList, provider, reload);
+	const balances = useTokenBalances(tokenAddressList, filteredAddressList, reload, provider);
 
 	const notMobileDevice = useMediaQuery("(min-width: 768px)");
 

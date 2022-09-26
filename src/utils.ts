@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { NetowrkInfo } from "./types";
+import { NetowrkInfo, Web3Provider } from "./types";
 
 // shorten the checksummed version of the input address to have 0x + 4 characters at start and end
 export const shortenAddress = (address: string, chars = 4): string => {
@@ -17,10 +17,10 @@ export const getInjected = (): any => {
 	return (window as any).ethereum;
 };
 
-export const getProvider = (pollingInterval = 15000): ethers.providers.Web3Provider | null => {
+export const getProvider = (pollingInterval = 15000): Web3Provider => {
 	const ethereum = getInjected();
 
-	if (typeof ethereum === "undefined") return null;
+	if (typeof ethereum === "undefined") return;
 
 	const provider = new ethers.providers.Web3Provider(ethereum);
 	provider.pollingInterval = pollingInterval;

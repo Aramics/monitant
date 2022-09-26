@@ -1,10 +1,10 @@
 import { ethers } from "ethers";
 import { useState } from "react";
-import { Provider } from "src/types";
+import { Web3Provider } from "src/types";
 import { useLocalStorage } from "usehooks-ts";
 
 const useWalletAddresses = (
-	provider?: Provider
+	provider?: Web3Provider
 ): {
 	addressList: string[];
 	saveAddress: (address: string) => Promise<boolean>;
@@ -52,10 +52,10 @@ const useWalletAddresses = (
 	return { addressList, saveAddress, removeAddress, error };
 };
 
-const isValidAddress = async (address: string, provider): Promise<boolean> => {
+const isValidAddress = async (address: string, provider?: Web3Provider): Promise<boolean> => {
 	if (!ethers.utils.isAddress(address)) return false;
 
-	if (provider !== null) {
+	if (typeof provider !== "undefined") {
 		const code = await provider?.getCode(address);
 		if (code !== "0x" && code !== "0x0") return false;
 	}
