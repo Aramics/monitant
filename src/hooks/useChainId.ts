@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ChainId, getInjected } from "src/constants/network";
+import { ChainId } from "src/constants/network";
+import { getInjected } from "src/utils";
 
 // use custom chain id for our light use. To be switch to library as needed in future
 const useChainId = (): number | undefined => {
