@@ -5,13 +5,15 @@ import TokenBalanceTableHead from "./TokenBalanceTableHead";
 import TokenBalanceTablePagination from "./TokenBalanceTablePagination";
 import TokenBalanceTableRow from "./TokenBalanceTableRow";
 import { useInterval, useCounter, useMediaQuery } from "usehooks-ts";
-import { shortenAddress, getProvider } from "../../utils";
+import { shortenAddress } from "../../utils";
+import { Provider } from "src/types";
 
 type TokenBalanceMonitorProps = {
 	addressList: string[];
 	tokenAddressList: string[];
 	tokenNameList: string[];
 	refreshInterval: number | null;
+	provider: Provider;
 	onAddressDelete: (address: string) => void;
 };
 
@@ -20,11 +22,9 @@ const TokenBalanceMonitor = ({
 	tokenAddressList,
 	tokenNameList,
 	refreshInterval,
+	provider,
 	onAddressDelete
 }: TokenBalanceMonitorProps): JSX.Element => {
-	// network
-	const provider = getProvider();
-
 	// filterables
 	const [page, setPage] = useState(0);
 	const pageSize = 20; // @TODO: make this selectable from UI

@@ -1,3 +1,5 @@
+import ethers from "ethers";
+
 export type NetowrkInfo = {
 	chainId: string | number;
 	chainName: string;
@@ -26,3 +28,5 @@ export type AddressTokenMap = {
 export type Balances = { [address: string]: AddressTokenMap };
 
 export type TokenList = { [address: string]: string };
+
+export type Provider = ethers.providers.Web3Provider | null;

@@ -1,9 +1,11 @@
 import { ethers } from "ethers";
 import { useState } from "react";
-import { getProvider } from "src/utils";
+import { Provider } from "src/types";
 import { useLocalStorage } from "usehooks-ts";
 
-const useWalletAddresses = (): {
+const useWalletAddresses = (
+	provider?: Provider
+): {
 	addressList: string[];
 	saveAddress: (address: string) => Promise<boolean>;
 	removeAddress: (address: string) => boolean;
@@ -17,7 +19,7 @@ const useWalletAddresses = (): {
 
 		const newAddress = address.trim();
 
-		const isValid = await isValidAddress(newAddress);
+		const isValid = await isValidAddress(newAddress, provider);
 
 		if (!isValid) {
 			setError("Invalid address");
@@ -50,10 +52,8 @@ const useWalletAddresses = (): {
 	return { addressList, saveAddress, removeAddress, error };
 };
 
-const isValidAddress = async (address: string): Promise<boolean> => {
+const isValidAddress = async (address: string, provider): Promise<boolean> => {
 	if (!ethers.utils.isAddress(address)) return false;
-
-	const provider = getProvider();
 
 	if (provider !== null) {
 		const code = await provider?.getCode(address);

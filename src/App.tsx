@@ -11,9 +11,12 @@ import AddressAddButton from "./components/AddressList/AddressAddButton";
 import { TOKENS_NETWORK_MAP } from "./constants/addresses";
 import TokenBalanceMonitor from "./components/TokenBalance/TokenBalanceMonitor";
 import TokenBalanceRefreshInterval from "./components/TokenBalance/TokenBalanceRefreshInterval";
+import { getProvider } from "./utils";
 
 const App = (): JSX.Element => {
 	const chainId = useChain();
+	const provider = getProvider();
+
 	const { addressList, saveAddress, removeAddress, error } = useWalletAddresses();
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [searchText, setSearchText] = useState<string>("");
@@ -54,6 +57,7 @@ const App = (): JSX.Element => {
 					tokenAddressList={tokenAddressList}
 					tokenNameList={tokenNameList}
 					refreshInterval={refreshInterval * 1000}
+					provider={provider}
 					onAddressDelete={removeAddress}
 				/>
 			</div>
