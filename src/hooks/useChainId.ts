@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getInjected } from "src/constants/network";
+import { ChainId, getInjected } from "src/constants/network";
 
 // use custom chain id for our light use. To be switch to library as needed in future
 const useChainId = (): number | undefined => {
@@ -9,23 +9,17 @@ const useChainId = (): number | undefined => {
 		let mounted = true;
 
 		const ethereum = getInjected();
-		if (ethereum !== undefined) {
-			setChainId(Number(ethereum.chainId));
-		}
+		setChainId(Number(ethereum?.chainId ?? ChainId.ETHEREUM));
 
 		const handleChainChanged = (chainId: string | number): void => {
 			if (mounted) setChainId(Number(chainId));
 		};
 
-		if (ethereum?.on !== null) {
-			ethereum.on("chainChanged", handleChainChanged);
-		}
+		ethereum?.on("chainChanged", handleChainChanged);
 
 		return (): void => {
-			if (ethereum.removeListener !== null) {
-				ethereum.removeListener("chainChanged", handleChainChanged);
-			}
 			mounted = false;
+			ethereum?.removeListener("chainChanged", handleChainChanged);
 		};
 	}, []);
 
