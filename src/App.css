@@ -131,6 +131,12 @@ button.btn-sm {
 	padding: 0.3em 0.6em;
 }
 
+@media screen and (max-width: 480px) {
+	button:not(.btn-sm) {
+		padding: 0.6em 0.6em;
+	}
+}
+
 input,
 select {
 	display: block;
@@ -163,7 +169,7 @@ input.search {
 	}
 }
 
-/*** X selector *****/
+/*** utils selector *****/
 .flex {
 	display: flex;
 	justify-content: space-between;
@@ -179,48 +185,6 @@ input.search {
 
 .gap-4 {
 	gap: 4px;
-}
-
-@media screen and (max-width: 480px) {
-	button:not(.btn-sm) {
-		padding: 0.6em 0.6em;
-	}
-}
-
-@media screen and (max-width: 360px) {
-	.toolbar,
-	.toolbar .flex {
-		flex-wrap: wrap;
-		justify-content: center;
-		flex-direction: column-reverse;
-	}
-
-	.toolbar .search,
-	.toolbar .flex,
-	.toolbar button {
-		width: 100%;
-	}
-
-	.toolbar button {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-}
-
-.toolbar .refresh {
-	position: relative;
-}
-
-.toolbar .refresh img {
-	position: absolute;
-	left: 4px;
-	top: 10px;
-	width: 15px;
-}
-
-.toolbar .refresh select {
-	padding-left: 18px;
 }
 
 /** modal component **/
@@ -300,8 +264,55 @@ input.search {
 
 @media screen and (max-height: 780px) {
 	.theme-switch-container {
-		left: 10px;
+		bottom: 10px;
+	}
+
+	.theme-switch button {
 		bottom: 0;
+		padding: 12px 14px;
+	}
+
+	.theme-switch span {
+		right: 8px;
+		bottom: 5px;
+		font-size: 14px;
+	}
+}
+
+/** toobar **/
+.toolbar .refresh {
+	position: relative;
+}
+
+.toolbar .refresh img {
+	position: absolute;
+	left: 4px;
+	top: 10px;
+	width: 15px;
+}
+
+.toolbar .refresh select {
+	padding-left: 18px;
+}
+
+@media screen and (max-width: 360px) {
+	.toolbar,
+	.toolbar .flex {
+		flex-wrap: wrap;
+		justify-content: center;
+		flex-direction: column-reverse;
+	}
+
+	.toolbar .search,
+	.toolbar .flex,
+	.toolbar button {
+		width: 100%;
+	}
+
+	.toolbar button {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }
 
@@ -312,6 +323,12 @@ input.search {
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0px 0px 20px rgb(83 83 132 / 38%);
+}
+
+@media screen and (max-width: 480px) {
+	.monitor {
+		margin-top: 20px;
+	}
 }
 
 .toolbar {
@@ -332,6 +349,12 @@ input.search {
 	max-height: 55vh;
 }
 
+@media screen and (max-width: 360px) {
+	.responsive-table {
+		height: 40vh;
+	}
+}
+
 table {
 	width: 100%;
 	position: relative;
@@ -347,10 +370,6 @@ th {
 }
 
 @media screen and (max-width: 480px) {
-	.monitor {
-		margin-top: 20px;
-	}
-
 	td,
 	th {
 		padding: 6px 4px;
